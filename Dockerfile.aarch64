@@ -1,0 +1,13 @@
+# for aarch64
+
+# from nvidia pytorch image https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch
+FROM nvcr.io/nvidia/l4t-pytorch:r32.6.1-pth1.9-py3
+
+# workign directory
+WORKDIR /workspace
+
+# install linux packages
+RUN apt-get update
+
+RUN rm -rf /var/lib/apt/lists/* && \
+    apt-get clean

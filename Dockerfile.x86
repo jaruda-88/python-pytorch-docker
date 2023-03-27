@@ -1,0 +1,23 @@
+# build for linux / wsl
+
+# from nvidia PyTorch image https://ngc.nvidia.com/catalog/containers/nvidia:pytorch
+FROM nvcr.io/nvidia/pytorch:21.10-py3
+
+# nvidia pubkey erros
+# RUN apt install curl
+# RUN apt-get del 7fa2af80
+# RUN curl -O https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
+# RUN dpkg -i cuda-keyring_1.0-1_all.deb
+
+# working directory
+WORKDIR /workspace
+
+# install linux packages and dependence
+RUN apt update && \
+    apt install -y libgl1-mesa-glx libglib2.0-0
+
+# apt clean
+RUN rm -rf /var/lib/api/lists/* && \
+    apt-get clean
+
+# docker run -it --gpus all {image}
